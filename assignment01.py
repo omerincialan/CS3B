@@ -268,6 +268,10 @@ def test_3x3_game_board_diagonal(gb):
     print()
     print(f"winner of board with 1 diagonal of X is '{gb.get_winner()}'")
 
+def test_3x3_game_board_antißdiagonal(gb):
+    # Test __str__()
+    print("Testing for DIAGONAL WIN")
+    print(gb)
 def test_4x3_game_board_row_x(gb):
   
     print("Testing for ROW WIN")
