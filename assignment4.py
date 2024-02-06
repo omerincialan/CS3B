@@ -88,4 +88,41 @@ class AndGate(LogicGate):
         if self._input0.value is not None and self._input1.value is not None:
             # AND logic: output is True if both inputs are True, False otherwise
             self._output.value = self._input0.value and self._input1.value
+class OrGate(LogicGate):
+    def __init__(self, name):
+        super().__init__(name)
+        self._input0 = Input(self)  # First input for the OR gate
+        self._input1 = Input(self)  # Second input for the OR gate
+
+    @property
+    def input0(self):
+        return self._input0
+
+    @property
+    def input1(self):
+        return self._input1
+
+    def evaluate(self):
+        # OR logic: output is True if at least one input is True
+        if self._input0.value is not None and self._input1.value is not None:
+            self._output.value = self._input0.value or self._input1.value
+
+class XorGate(LogicGate):
+    def __init__(self, name):
+        super().__init__(name)
+        self._input0 = Input(self)  # First input for the XOR gate
+        self._input1 = Input(self)  # Second input for the XOR gate
+
+    @property
+    def input0(self):
+        return self._input0
+
+    @property
+    def input1(self):
+        return self._input1
+
+    def evaluate(self):
+        # XOR logic: output is True if inputs are different
+        if self._input0.value is not None and self._input1.value is not None:
+            self._output.value = self._input0.value != self._input1.value
 
