@@ -68,4 +68,20 @@ class Output:
         if input_ not in self._connections:
             self._connections.append(input_)
             input_.value = self._value  # Update the input value immediately if this output has a value
+class NotGate(LogicGate):
+    def __init__(self, name):
+        super().__init__(name)
+        self._input = Input(self)  # Create an Input instance owned by this gate
+        self._output = Output()  # Initialize the output
+
+    @property
+    def input(self):
+        return self._input
+
+    def evaluate(self):
+        if self._input.value is not None:  # Check if the input has a value
+            self._output.value = not self._input.value  # Set the output to the opposite of the input value
+
+    def __str__(self):
+        return f"Gate '{self.name}': input={self._input}, output={self._output}"
 
