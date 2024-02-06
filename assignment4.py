@@ -57,3 +57,16 @@ class LogicGate:
     def evaluate(self):
         pass  # This method will be overridden by subclasses to implement specific logic
 
+class NotGate(LogicGate):
+    def __init__(self, name):
+        super().__init__(name)
+        self._input = Input(self)  # NotGate has a single input
+
+    @property
+    def input(self):
+        return self._input
+
+    def evaluate(self):
+        if self._input.value is not None:  # Ensure the input value is set
+            self._output.value = not self._input.value  # Invert the input value for the output
+
