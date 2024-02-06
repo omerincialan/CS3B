@@ -45,7 +45,7 @@ class Input:
 class Output:
     def __init__(self):
         self._value = None
-        self._connections = []  # For extra credit
+        self._connections = []  # List to hold connections to other inputs
 
     @property
     def value(self):
@@ -54,20 +54,22 @@ class Output:
     @value.setter
     def value(self, new_value):
         self._value = bool(new_value)  # Convert new_value to boolean
-        # For extra credit: Update connected inputs
         for input_ in self._connections:
-            input_.value = self._value
+            input_.value = self._value  # Update all connected inputs
 
-    def __str__(self):
-        return str(self._value) if self._value is not None else "(no value)"
-
-    # For extra credit: Method to connect this output to another gate's input
     def connect(self, input_):
+        """Connects this output to another gate's input."""
         if not isinstance(input_, Input):
             raise TypeError("Can only connect to an Input instance")
         if input_ not in self._connections:
             self._connections.append(input_)
-            input_.value = self._value  # Update the input value immediately if this output has a value
+            # If this output already has a value, update the connected input immediately
+            if self._value is not None:
+                input_.value = self._value
+
+    def __str__(self):
+        return str(self._value) if self._value is not None else "(no value)"
+
 class NotGate(LogicGate):
     def __init__(self, name):
         super().__init__(name)
