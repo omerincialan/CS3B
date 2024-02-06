@@ -106,4 +106,25 @@ class AndGate(LogicGate):
 
     def __str__(self):
         return f"Gate '{self.name}': input0={self._input0}, input1={self._input1}, output={self._output}"
+class OrGate(LogicGate):
+    def __init__(self, name):
+        super().__init__(name)
+        self._input0 = Input(self)
+        self._input1 = Input(self)
+        self._output = Output()
+
+    def evaluate(self):
+        if self._input0.value is not None and self._input1.value is not None:
+            self._output.value = self._input0.value or self._input1.value
+
+class XorGate(LogicGate):
+    def __init__(self, name):
+        super().__init__(name)
+        self._input0 = Input(self)
+        self._input1 = Input(self)
+        self._output = Output()
+
+    def evaluate(self):
+        if self._input0.value is not None and self._input1.value is not None:
+            self._output.value = self._input0.value != self._input1.value
 
