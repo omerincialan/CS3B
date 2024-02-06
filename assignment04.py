@@ -84,4 +84,26 @@ class NotGate(LogicGate):
 
     def __str__(self):
         return f"Gate '{self.name}': input={self._input}, output={self._output}"
+class AndGate(LogicGate):
+    def __init__(self, name):
+        super().__init__(name)
+        self._input0 = Input(self)  # First input
+        self._input1 = Input(self)  # Second input
+        self._output = Output()
+
+    @property
+    def input0(self):
+        return self._input0
+
+    @property
+    def input1(self):
+        return self._input1
+
+    def evaluate(self):
+        if self._input0.value is not None and self._input1.value is not None:
+            # Perform AND operation and set the output
+            self._output.value = self._input0.value and self._input1.value
+
+    def __str__(self):
+        return f"Gate '{self.name}': input0={self._input0}, input1={self._input1}, output={self._output}"
 
