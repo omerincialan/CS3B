@@ -69,4 +69,23 @@ class NotGate(LogicGate):
     def evaluate(self):
         if self._input.value is not None:  # Ensure the input value is set
             self._output.value = not self._input.value  # Invert the input value for the output
+class AndGate(LogicGate):
+    def __init__(self, name):
+        super().__init__(name)
+        self._input0 = Input(self)  # First input for the AND gate
+        self._input1 = Input(self)  # Second input for the AND gate
+
+    @property
+    def input0(self):
+        return self._input0
+
+    @property
+    def input1(self):
+        return self._input1
+
+    def evaluate(self):
+        # Check if both inputs are set
+        if self._input0.value is not None and self._input1.value is not None:
+            # AND logic: output is True if both inputs are True, False otherwise
+            self._output.value = self._input0.value and self._input1.value
 
